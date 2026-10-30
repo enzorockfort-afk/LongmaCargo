@@ -83,8 +83,9 @@ window.LONGMA_RO = {
   "trk.label": "Numărul comenzii", "trk.go": "Caută", "trk.none": "Comanda nu a fost găsită",
   "trk.noneT": "Verifică numărul. Dacă comanda e nouă, numărul e în contul personal.", "trk.num": "Comanda", "trk.from": "Plasată",
   // статусы
-  "st.new": "Cerere primită", "st.priced": "Prețul e gata", "st.confirmed": "Ai confirmat", "st.paid": "Achitat", "st.bought": "Cumpărat",
-  "st.warehouse": "În depozit în China", "st.shipped": "Expediat în Moldova", "st.arrived": "A ajuns în Moldova", "st.done": "Predat", "st.cancelled": "Anulat",
+  "st.new": "Comandă creată", "st.priced": "În procesare", "st.confirmed": "Comandă acceptată", "st.paid": "Achitat", "st.bought": "Cumpărat",
+  "st.warehouse": "A ajuns în depozit", "st.packing": "Se ambalează", "st.left": "A plecat din depozit",
+  "st.shipped": "Expediat în Moldova", "st.arrived": "A ajuns în Moldova", "st.done": "Primit", "st.cancelled": "Anulat",
   // кабинет
   "title.account": "Contul personal — Longma",
   "acc.h": "Contul personal", "acc.lead": "Plasează comenzi, confirmă prețul și urmărește fiecare colet — de la cumpărare până la întâlnire.",

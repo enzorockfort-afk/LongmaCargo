@@ -11,11 +11,11 @@
     ["active", "В работе", (o) => !["done", "cancelled"].includes(o.status)],
     ["new", "Новые — назначить цену", (o) => o.status === "new"],
     ["check", "Проверить оплату", (o) => !!o.paidClaimAt && ["priced", "confirmed"].includes(o.status)],
-    ["priced", "Ждут клиента", (o) => o.status === "priced"],
+    ["priced", "В обработке", (o) => o.status === "priced"],
     ["buy", "Оплата и выкуп", (o) => ["confirmed", "paid", "bought"].includes(o.status)],
-    ["move", "Склад и дорога", (o) => ["warehouse", "shipped"].includes(o.status)],
+    ["move", "Склад и дорога", (o) => ["warehouse", "packing", "left", "shipped"].includes(o.status)],
     ["arrived", "Передать клиенту", (o) => o.status === "arrived"],
-    ["done", "Выданы", (o) => o.status === "done"],
+    ["done", "Получены", (o) => o.status === "done"],
     ["cancelled", "Отменены", (o) => o.status === "cancelled"],
     ["all", "Все", () => true],
   ];
@@ -61,9 +61,9 @@
     $("#admKpis").innerHTML = `
       <div class="kpi${cnt(g("new")) ? " kpi-red" : ""}"><small>Назначить цену</small><b>${cnt(g("new"))}</b></div>
       <div class="kpi${cnt(g("check")) ? " kpi-red" : ""}"><small>Проверить оплату</small><b>${cnt(g("check"))}</b></div>
-      <div class="kpi"><small>Ждут клиента</small><b>${cnt(g("priced"))}</b></div>
-      <div class="kpi"><small>В дороге</small><b>${cnt((o) => o.status === "shipped")}</b></div>
-      <div class="kpi"><small>Выдано на сумму</small><b>${U.lei(revenue)}</b></div>`;
+      <div class="kpi"><small>В обработке</small><b>${cnt(g("priced"))}</b></div>
+      <div class="kpi"><small>В дороге</small><b>${cnt((o) => ["left", "shipped"].includes(o.status))}</b></div>
+      <div class="kpi"><small>Получено на сумму</small><b>${U.lei(revenue)}</b></div>`;
   }
   function renderOrders() {
     $("#chips").innerHTML = GROUPS.map(([k, t, f]) => `<button type="button" class="chip" data-f="${k}" aria-pressed="${filter === k}">${t} <b>${orders.filter(f).length}</b></button>`).join("");

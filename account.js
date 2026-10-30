@@ -85,7 +85,8 @@
 
   function card(o, fresh) {
     const c = V.cost(o);
-    const canConfirm = o.status === "priced";
+    // подтвердить можно, когда менеджер уже поставил цену
+    const canConfirm = o.status === "priced" && c.hasPrice;
     const canCancel = o.status === "new" || o.status === "priced";
     return `<article class="ocard${fresh ? " fresh" : ""}" data-id="${esc(o.id)}">
       <header class="oc-head">

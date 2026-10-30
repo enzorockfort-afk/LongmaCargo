@@ -27,8 +27,8 @@
 .pill { display: inline-flex; align-items: center; height: 28px; padding: 0 11px; border-radius: 99px; font-size: 12.5px; font-weight: 800; white-space: nowrap; background: var(--paper-2); color: var(--ink-2); }
 .pill-new, .pill-confirmed { background: #E7EEFF; color: #2F4FB8; }
 .pill-priced { background: var(--red); color: #fff; }
-.pill-paid, .pill-bought, .pill-warehouse { background: #FFF0D6; color: #9A5B00; }
-.pill-shipped { background: var(--ink); color: var(--paper); }
+.pill-paid, .pill-bought, .pill-warehouse, .pill-packing { background: #FFF0D6; color: #9A5B00; }
+.pill-shipped, .pill-left { background: var(--ink); color: var(--paper); }
 .pill-arrived { background: #DDF4EC; color: var(--sea); }
 .pill-done { background: var(--sea); color: #fff; }
 .pill-cancelled { background: transparent; color: var(--mute); box-shadow: inset 0 0 0 1.5px var(--line); }
