@@ -1,0 +1,40 @@
+rules_version = '2';
+// Правила для Firebase проекта Longma.
+// Firebase Console → Firestore Database → Rules → вставить весь текст → Publish.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+    function isAdmin() { return signedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)); }
+
+    // админы назначаются вручную в консоли: документ admins/{uid}
+    match /admins/{uid} { allow read: if signedIn() && request.auth.uid == uid; }
+
+    // профиль клиента: имя, телефон, Telegram, код клиента
+    match /users/{uid} {
+      allow read, write: if signedIn() && request.auth.uid == uid;
+      allow read: if isAdmin();
+    }
+
+    // заказы: клиент создаёт и видит свои; сам может только подтвердить цену или отменить
+    match /orders/{id} {
+      allow create: if signedIn() && request.resource.data.uid == request.auth.uid && request.resource.data.status == 'new';
+      allow read: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+      allow update: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid
+        && request.resource.data.uid == resource.data.uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'history', 'updatedAt'])
+        && request.resource.data.status in ['confirmed', 'cancelled']);
+      allow delete: if isAdmin();
+    }
+
+    // публичный трекер по номеру: только статус и даты, без личных данных
+    match /tracks/{track} {
+      allow get: if true;
+      allow list: if false;
+      allow create, update: if isAdmin() || (signedIn() && request.resource.data.uid == request.auth.uid);
+      allow delete: if isAdmin();
+    }
+
+    // заметки администратора (например, трек партнёра) — клиент их не видит
+    match /private/{id} { allow read, write: if isAdmin(); }
+  }
+}

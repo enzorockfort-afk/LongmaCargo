@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Longma — карго из Китая в Молдову</title>
+  <meta name="description" content="Выкупаем товары в Китае и привозим в Молдову. Самолёт 14–20 дней, море 45–60 дней, от 1 кг. Выдача лично.">
+  <meta name="theme-color" content="#F8EFE0">
+  <link rel="icon" type="image/webp" href="assets/app-icon.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="portal.css?v=5">
+</head>
+<body data-page="home">
+<main id="main">
+  <section class="hero">
+    <div class="hero-txt">
+      <h1 class="h1"><span class="ln"><span data-i="hero.h1a">Привезём</span></span> <span class="ln"><span data-i="hero.h1b">из Китая всё,</span></span> <span class="ln"><span data-i="hero.h1c">что вы нашли</span></span></h1>
+      <p class="lead" data-i="hero.lead">Пришлите ссылку — выкупим сами, привезём в Молдову и передадим вам лично.</p>
+      <div class="hero-cta">
+        <a class="btn btn-red" href="order.html"><svg class="ic"><use href="#i-send"/></svg><span data-i="cta">Оставить заявку</span></a>
+        <a class="btn btn-line" href="rates.html#calc"><svg class="ic"><use href="#i-scale"/></svg><span data-i="hero.calc">Посчитать доставку</span></a>
+      </div>
+      <ul class="facts">
+        <li><svg class="ic"><use href="#i-plane"/></svg><span><b>120 ¥</b> <span data-i="fact.air">за кг самолётом</span></span></li>
+        <li><svg class="ic"><use href="#i-ship"/></svg><span><b>50 ¥</b> <span data-i="fact.sea">за кг морем</span></span></li>
+        <li><svg class="ic"><use href="#i-scale"/></svg><span><b data-i="fact.min">от 1 кг</b> <span data-i="fact.mins">можно отправить</span></span></li>
+        <li><svg class="ic"><use href="#i-hand"/></svg><span><b data-i="fact.meet">Лично</b> <span data-i="fact.meets">передаём в Молдове</span></span></li>
+      </ul>
+    </div>
+
+    <!-- накладная с живым маршрутом -->
+    <article class="bill" id="bill" aria-label="Пример накладной Longma">
+      <div class="bill-top">
+        <span class="crop crop-app bill-logo"><img src="assets/app-icon.webp" alt="" width="1254" height="1254"></span>
+        <div><b data-i="bill.t">Накладная</b><small>LM 2026 · 0481</small></div>
+        <span class="bill-st" data-i="bill.st">В пути</span>
+      </div>
+
+      <div class="bill-ends">
+        <div><small data-i="bill.from">Откуда</small><b>广州 Guangzhou</b><span data-i="bill.china">склад в Китае</span></div>
+        <svg class="ic bill-arrow"><use href="#i-arrow"/></svg>
+        <div class="to"><small data-i="bill.to">Куда</small><b>Chișinău</b><span data-i="bill.md">встреча, Молдова</span></div>
+      </div>
+
+      <div class="scene" id="scene">
+        <svg viewBox="0 0 520 280" class="scene-svg" aria-hidden="true">
+          <defs>
+            <radialGradient id="sky" cx="50%" cy="110%" r="90%">
+              <stop offset="0" stop-color="#2A3552"/><stop offset=".55" stop-color="#1A2236"/><stop offset="1" stop-color="#121826"/>
+            </radialGradient>
+            <linearGradient id="gAir" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#FF9A5C"/><stop offset="1" stop-color="#DD3820"/></linearGradient>
+            <linearGradient id="gSea" x1="1" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#7BE6C6"/><stop offset="1" stop-color="#2E8F78"/></linearGradient>
+            <filter id="blur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="6"/></filter>
+          </defs>
+          <rect width="520" height="280" fill="url(#sky)"/>
+          <!-- изгиб земли -->
+          <g class="globe">
+            <path d="M-40 300 Q260 170 560 300"/><path d="M-40 330 Q260 205 560 330"/><path d="M-40 360 Q260 240 560 360"/>
+            <path d="M260 175 V280"/><path d="M160 190 Q130 240 110 300"/><path d="M360 190 Q390 240 410 300"/><path d="M70 220 Q30 260 10 300"/><path d="M450 220 Q490 260 510 300"/>
+          </g>
+          <g class="stars"><circle cx="40" cy="30" r="1.2"/><circle cx="130" cy="58" r="1"/><circle cx="210" cy="22" r="1.4"/><circle cx="300" cy="46" r="1"/><circle cx="388" cy="26" r="1.3"/><circle cx="470" cy="60" r="1"/><circle cx="500" cy="18" r="1.2"/><circle cx="96" cy="160" r="1"/></g>
+          <!-- облака для самолёта -->
+          <g class="clouds">
+            <g class="cloud c1"><rect x="0" y="0" width="70" height="16" rx="8"/><rect x="16" y="-9" width="34" height="18" rx="9"/></g>
+            <g class="cloud c2"><rect x="0" y="0" width="54" height="13" rx="6.5"/><rect x="12" y="-7" width="26" height="14" rx="7"/></g>
+            <g class="cloud c3"><rect x="0" y="0" width="44" height="11" rx="5.5"/></g>
+          </g>
+          <!-- волны для моря -->
+          <g class="waves">
+            <path class="w1" d="M-60 252 q30 -10 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 V290 H-60z"/>
+            <path class="w2" d="M-60 264 q30 -9 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0 V290 H-60z"/>
+          </g>
+          <path id="pAir" class="trk trk-air" d="M455 196 C 420 40, 170 20, 72 108"/>
+          <path id="pSea" class="trk trk-sea" d="M455 196 C 420 262, 270 270, 190 236 S 90 160, 72 108"/>
+          <path id="runGlow" class="run-glow" d="M455 196 C 420 40, 170 20, 72 108" filter="url(#blur)"/>
+          <path id="run" class="run" d="M455 196 C 420 40, 170 20, 72 108"/>
+          <g class="trail"><circle r="4"/><circle r="3.4"/><circle r="2.8"/><circle r="2.2"/></g>
+          <g class="pin pin-from"><circle class="ring" cx="455" cy="196" r="10"/><circle cx="455" cy="196" r="6.5"/></g>
+          <g class="pin pin-to"><circle class="ring" cx="72" cy="108" r="10"/><circle cx="72" cy="108" r="6.5"/></g>
+          <g id="veh" class="veh" transform="translate(455 196)"><circle class="veh-halo" r="26"/><circle r="18"/><use id="vehIc" href="#i-plane" x="-10" y="-10" width="20" height="20"/></g>
+        </svg>
+        <span class="tag tag-to"><b>MD</b> Chișinău</span>
+        <span class="tag tag-from"><b>CN</b> Guangzhou</span>
+        <span class="hud hud-km" id="hudKm">0 км</span>
+        <span class="hud hud-day" id="hudDay"></span>
+      </div>
+
+      <div class="modes" role="radiogroup" aria-label="Способ доставки">
+        <label><input type="radio" name="mode" value="air" checked><span><svg class="ic"><use href="#i-plane"/></svg><span data-i="rates.air">Самолёт</span></span></label>
+        <label><input type="radio" name="mode" value="sea"><span><svg class="ic"><use href="#i-ship"/></svg><span data-i="rates.sea">Море</span></span></label>
+      </div>
+
+      <dl class="bill-nums">
+        <div><dt data-i="bill.days">Срок</dt><dd id="bDays">14–20</dd><em data-i="days">дней</em></div>
+        <div><dt data-i="bill.rate">Тариф</dt><dd id="bRate">120 ¥</dd><em data-i="perkg">за кг</em></div>
+        <div><dt data-i="bill.min">Минимум</dt><dd>1</dd><em data-i="kg">кг</em></div>
+      </dl>
+
+      <div class="bill-bottom">
+        <ol class="track" id="track"><li data-i="tr.1">Выкуп</li><li data-i="tr.2">Склад</li><li data-i="tr.3">В пути</li><li data-i="tr.4">Встреча</li></ol>
+        <span class="barcode" aria-hidden="true"></span>
+      </div>
+      <span class="crop crop-panda bill-panda" aria-hidden="true"><img src="assets/panda.webp" alt="" width="1254" height="1254"></span>
+    </article>
+  </section>
+
+  <div class="ticker" aria-label="Площадки, с которых мы выкупаем"><div class="ticker-in">
+    <span>Poizon</span><span>Taobao</span><span>1688</span><span>Pinduoduo</span><span>Tmall</span><span>JD</span><span>Xianyu</span>
+    <span aria-hidden="true">Poizon</span><span aria-hidden="true">Taobao</span><span aria-hidden="true">1688</span><span aria-hidden="true">Pinduoduo</span><span aria-hidden="true">Tmall</span><span aria-hidden="true">JD</span><span aria-hidden="true">Xianyu</span>
+  </div></div>
+
+  <section class="sec">
+    <h2 class="h2" data-i="how.h">От ссылки до встречи</h2>
+    <ol class="steps">
+      <li><span class="st-ic"><svg class="ic"><use href="#i-link"/></svg></span><h3 data-i="how.1">Присылаете ссылку</h3><p data-i="how.1t">Или фото вещи. Пишете размер, цвет и количество.</p></li>
+      <li><span class="st-ic"><svg class="ic"><use href="#i-bag"/></svg></span><h3 data-i="how.2">Мы выкупаем</h3><p data-i="how.2t">Называем цену и покупаем сами. Китайский аккаунт и карта вам не нужны.</p></li>
+      <li><span class="st-ic"><svg class="ic"><use href="#i-box"/></svg></span><h3 data-i="how.3">Склад в Китае</h3><p data-i="how.3t">Товар приходит на склад логистического партнёра и собирается в посылку.</p></li>
+      <li><span class="st-ic"><svg class="ic"><use href="#i-plane"/></svg></span><h3 data-i="how.4">Везём</h3><p data-i="how.4t">Самолётом за 14–20 дней или морем за 45–60.</p></li>
+      <li><span class="st-ic st-red"><svg class="ic"><use href="#i-hand"/></svg></span><h3 data-i="how.5">Передаём лично</h3><p data-i="how.5t">Посылка в Молдове — договариваемся о встрече и отдаём вам в руки.</p></li>
+    </ol>
+  </section>
+
+  <section class="sec">
+    <div class="doors">
+      <a class="door door-red" href="rates.html"><svg class="ic"><use href="#i-scale"/></svg><h3 data-i="door.rates">Тарифы и калькулятор</h3><p data-i="door.ratest">Сколько стоит доставка вашей посылки самолётом или морем.</p><span class="door-go"><svg class="ic"><use href="#i-arrow"/></svg></span></a>
+      <a class="door" href="guide.html"><svg class="ic"><use href="#i-search"/></svg><h3 data-i="door.guide">Как заказать с Китая</h3><p data-i="door.guidet">Где искать вещи, как скопировать ссылку и что прислать нам.</p><span class="door-go"><svg class="ic"><use href="#i-arrow"/></svg></span></a>
+      <a class="door door-ink" href="faq.html"><svg class="ic"><use href="#i-question"/></svg><h3 data-i="door.faq">Частые вопросы</h3><p data-i="door.faqt">Вес, сроки, брак, что нельзя отправить.</p><span class="door-go"><svg class="ic"><use href="#i-arrow"/></svg></span></a>
+    </div>
+  </section>
+
+  <section class="sec">
+    <div class="band">
+      <span class="crop crop-panda band-panda" aria-hidden="true"><img src="assets/panda.webp" alt="" width="1254" height="1254"></span>
+      <div><h2 class="h2" data-i="band.h">Нашли вещь? Пришлите ссылку</h2><p class="sub" data-i="band.t">Ответим в Telegram, назовём цену и срок.</p></div>
+      <a class="btn btn-red" href="order.html"><svg class="ic"><use href="#i-send"/></svg><span data-i="cta">Оставить заявку</span></a>
+    </div>
+  </section>
+</main>
+<script src="config.js?v=5"></script>
+<script src="i18n.js?v=5"></script>
+<script src="store.js?v=5"></script>
+<script src="app.js?v=5"></script>
+</body>
+</html>

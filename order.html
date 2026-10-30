@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Заявка на доставку — Longma</title>
+  <meta name="description" content="Пришлите ссылки на товары из Китая — выкупим и привезём в Молдову.">
+  <meta name="theme-color" content="#F8EFE0">
+  <link rel="icon" type="image/webp" href="assets/app-icon.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css?v=5">
+  <link rel="stylesheet" href="portal.css?v=5">
+</head>
+<body data-page="order">
+<main id="main">
+  <section class="sec sec-first">
+    <div class="order">
+      <div class="order-l">
+        <h1 class="h1 h1-page" data-i="order.h">Что привезти?</h1>
+        <p class="lead" data-i="order.sub">Заполните форму — заявка откроется в Telegram у менеджера, останется нажать «Отправить».</p>
+        <a class="tg-card" href="https://t.me/longma_cargo" target="_blank" rel="noopener">
+          <svg class="ic"><use href="#i-tg"/></svg>
+          <span><small data-i="order.direct">Или напишите сразу</small><b>@longma_cargo</b></span>
+        </a>
+        <span class="crop crop-panda order-panda" aria-hidden="true"><img src="assets/panda.webp" alt="" width="1254" height="1254"></span>
+      </div>
+      <form class="order-f" id="orderForm" novalidate>
+        <label class="field"><span data-i="f.links">Ссылки на товары</span><textarea name="links" rows="3" data-ph="f.linksPh" placeholder="Каждая ссылка с новой строки" required></textarea></label>
+        <div class="row2">
+          <label class="field"><span data-i="f.size">Размер и цвет</span><input name="size" data-ph="f.sizePh" placeholder="42, чёрный"></label>
+          <label class="field"><span data-i="f.qty">Количество</span><input name="qty" type="number" inputmode="numeric" min="1" value="1"></label>
+        </div>
+        <div class="field"><span data-i="f.method">Доставка</span>
+          <div class="seg" role="radiogroup" aria-label="Доставка">
+            <label><input type="radio" name="method" value="air" checked><span><svg class="ic"><use href="#i-plane"/></svg><span data-i="rates.air">Самолёт</span></span></label>
+            <label><input type="radio" name="method" value="sea"><span><svg class="ic"><use href="#i-ship"/></svg><span data-i="rates.sea">Море</span></span></label>
+          </div>
+        </div>
+        <div class="row2">
+          <label class="field"><span data-i="f.name">Имя</span><input name="name" autocomplete="name" required></label>
+          <label class="field"><span>Telegram</span><input name="tg" data-ph="f.tgPh" placeholder="@username или номер" required></label>
+        </div>
+        <label class="field"><span data-i="f.note">Комментарий</span><textarea name="note" rows="2"></textarea></label>
+        <p class="err" id="err" role="alert"></p>
+        <p class="ok" id="ok" role="status"></p>
+        <p class="note-in when-out"><svg class="ic"><use href="#i-user"/></svg><span><span data-i="f.loginHint">Войдите в кабинет — заказ получит трек-номер, а статус будет виден на сайте.</span> <a href="account.html?next=order.html" data-i="f.login">Войти или зарегистрироваться</a></span></p>
+        <p class="note-in when-in" hidden><svg class="ic"><use href="#i-check"/></svg><span data-i="f.inHint">Заказ сохранится в вашем кабинете, менеджер пришлёт цену.</span></p>
+        <button class="btn btn-red btn-block when-out"><svg class="ic"><use href="#i-tg"/></svg><span data-i="f.send">Отправить в Telegram</span></button>
+        <button class="btn btn-red btn-block when-in" hidden><svg class="ic"><use href="#i-send"/></svg><span data-i="f.create">Оформить заказ</span></button>
+      </form>
+    </div>
+  </section>
+</main>
+<script src="config.js?v=5"></script>
+<script src="i18n.js?v=5"></script>
+<script src="store.js?v=5"></script>
+<script src="app.js?v=5"></script>
+</body>
+</html>
