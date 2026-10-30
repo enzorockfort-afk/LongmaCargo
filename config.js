@@ -20,10 +20,12 @@ window.LONGMA = {
      Чтобы всё работало у всех клиентов — создайте проект Firebase
      и вставьте сюда его конфиг (Project settings → Your apps → Web). */
   firebase: {
-    apiKey: "",
-    authDomain: "",
-    projectId: "",
-    appId: "",
+    apiKey: "AIzaSyBQbh6BqXkFqR8vCEqGo4Gh31czqoFWuF0",
+    authDomain: "longma-8d97e.firebaseapp.com",
+    projectId: "longma-8d97e",
+    storageBucket: "longma-8d97e.firebasestorage.app",
+    messagingSenderId: "558162575584",
+    appId: "1:558162575584:web:ddd873f401ca58d2ec9085",
   },
   // демо-вход администратора (только в демо-режиме, в Firebase не используется)
   demoAdmin: { email: "admin@longma.md", password: "Longma2026" },
