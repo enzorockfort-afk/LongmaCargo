@@ -103,5 +103,7 @@ window.LONGMA_RO = {
   "acc.demo": "Mod demo: conturile se păstrează doar în acest browser.",
   // заявка из кабинета
   "f.loginHint": "Intră în cont — comanda primește un număr de urmărire, iar statusul se vede pe site.", "f.login": "Intră sau înregistrează-te",
-  "f.inHint": "Comanda se salvează în contul tău, managerul îți trimite prețul.", "f.create": "Plasează comanda",
+  "pay.due": "De plată", "pay.card": "Achită cu cardul", "pay.done": "Am achitat", "pay.checking": "Plata se verifică",
+  "pay.or": "Sau prin transfer", "pay.ref": "În comentariu indică numărul comenzii", "pay.thanks": "Mulțumim! Managerul verifică plata și cumpără comanda",
+  "f.inHint":"Comanda se salvează în contul tău, managerul îți trimite prețul.", "f.create": "Plasează comanda",
 };

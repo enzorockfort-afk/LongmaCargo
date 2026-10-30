@@ -10,8 +10,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=5">
-  <link rel="stylesheet" href="portal.css?v=5">
+  <link rel="stylesheet" href="styles.css?v=7">
+  <link rel="stylesheet" href="portal.css?v=7">
 </head>
 <body data-page="admin">
 <main id="main">
@@ -68,6 +68,8 @@
         <label class="field"><span>Итог вручную, лей</span><input name="finalLei" type="number" inputmode="numeric" min="0" placeholder="авто"></label>
       </div>
       <p class="om-calc" id="omCalc"></p>
+      <div class="om-paid" id="omPaid" hidden></div>
+      <label class="field"><span>Ссылка на оплату (RollyPay, maib, Paynet — клиент увидит кнопку «Оплатить картой»)</span><input name="payUrl" type="url" autocomplete="off" placeholder="https://"></label>
       <label class="field"><span>Сообщение клиенту (видно в кабинете)</span><textarea name="managerNote" rows="2" placeholder="Например: оплата на карту, реквизиты пришлём в Telegram"></textarea></label>
       <div class="field"><span>Фото товара (до 4, видны клиенту)</span>
         <div class="om-photos" id="omPhotos"></div>
@@ -92,11 +94,11 @@
   </form>
 </dialog>
 <div class="toast" id="toast" role="status" hidden></div>
-<script src="config.js?v=5"></script>
-<script src="i18n.js?v=5"></script>
-<script src="store.js?v=5"></script>
-<script src="app.js?v=5"></script>
-<script src="orders-ui.js?v=5"></script>
-<script src="admin.js?v=5"></script>
+<script src="config.js?v=7"></script>
+<script src="i18n.js?v=7"></script>
+<script src="store.js?v=7"></script>
+<script src="app.js?v=7"></script>
+<script src="orders-ui.js?v=7"></script>
+<script src="admin.js?v=7"></script>
 </body>
 </html>

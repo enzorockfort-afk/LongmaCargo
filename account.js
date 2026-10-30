@@ -68,6 +68,21 @@
     }
   }
 
+  /* оплата: ссылка от менеджера (RollyPay, maib, Paynet — любая) или перевод по реквизитам */
+  function payBlock(o, c) {
+    if (!["priced", "confirmed"].includes(o.status) || !c.hasPrice || (!o.payUrl && !C.payInfo)) return "";
+    return `<div class="oc-pay">
+      <div class="oc-pay-sum"><small>${esc(U.t("pay.due", "К оплате"))}</small><b>${U.lei(c.totalLei)}</b></div>
+      <div class="oc-pay-acts">
+        ${o.payUrl ? `<a class="btn btn-red btn-sm" href="${esc(o.payUrl)}" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-card"/></svg><span>${esc(U.t("pay.card", "Оплатить картой"))}</span></a>` : ""}
+        ${o.paidClaimAt
+          ? `<span class="pill pill-confirmed">${esc(U.t("pay.checking", "Оплата на проверке"))}</span>`
+          : `<button class="btn btn-line btn-sm" data-paid="${esc(o.id)}">${esc(U.t("pay.done", "Я оплатил"))}</button>`}
+      </div>
+      ${C.payInfo ? `<p class="oc-pay-info">${esc(U.t("pay.or", "Или переводом"))}: ${esc(C.payInfo)}. ${esc(U.t("pay.ref", "В комментарии укажите номер заказа"))} <b>${esc(o.track)}</b>.</p>` : ""}
+    </div>`;
+  }
+
   function card(o, fresh) {
     const c = V.cost(o);
     const canConfirm = o.status === "priced";
@@ -94,6 +109,7 @@
         </dl>
       </div>
       ${o.managerNote ? `<p class="oc-mgr"><svg class="ic"><use href="#i-tg"/></svg><span><b>${esc(U.t("acc.mgr", "Менеджер"))}:</b> ${esc(o.managerNote)}</span></p>` : ""}
+      ${payBlock(o, c)}
       ${(o.photos || []).length ? `<div class="oc-photos">${o.photos.map((p, i) => `<button type="button" data-zoom="${i}"><img src="${p}" alt="${esc(U.t("acc.photo", "Фото товара"))} ${i + 1}"></button>`).join("")}</div>` : ""}
       ${canConfirm || canCancel ? `<div class="oc-acts">
         ${canConfirm ? `<button class="btn btn-red btn-sm" data-confirm="${esc(o.id)}"><svg class="ic"><use href="#i-check"/></svg><span>${esc(U.t("acc.confirm", "Подтвердить цену"))}</span></button>` : ""}
@@ -151,6 +167,20 @@
   document.addEventListener("click", async (e) => {
     const cf = e.target.closest("[data-confirm]");
     const cn = e.target.closest("[data-cancel]");
+    const pd = e.target.closest("[data-paid]");
+    if (pd) {
+      pd.disabled = true;
+      const o = orders.find((x) => x.id === pd.dataset.paid);
+      try {
+        // «Я оплатил» заодно подтверждает цену, если клиент сразу перешёл к оплате
+        await api.orders.update(o.id, o.status === "priced" ? { status: "confirmed", paidClaimAt: Date.now() } : { paidClaimAt: Date.now() });
+        toast(U.t("pay.thanks", "Спасибо! Менеджер проверит оплату и выкупит заказ"));
+        await load();
+      } catch (err) {
+        pd.disabled = false;
+        toast(window.LM_DB.errorText(err, U.lang()));
+      }
+    }
     const zb = e.target.closest("[data-zoom]");
     if (cf || cn) {
       if (cn && !confirm(U.t("acc.cancelQ", "Отменить этот заказ?"))) return;

@@ -10,6 +10,7 @@
   const GROUPS = [
     ["active", "В работе", (o) => !["done", "cancelled"].includes(o.status)],
     ["new", "Новые — назначить цену", (o) => o.status === "new"],
+    ["check", "Проверить оплату", (o) => !!o.paidClaimAt && ["priced", "confirmed"].includes(o.status)],
     ["priced", "Ждут клиента", (o) => o.status === "priced"],
     ["buy", "Оплата и выкуп", (o) => ["confirmed", "paid", "bought"].includes(o.status)],
     ["move", "Склад и дорога", (o) => ["warehouse", "shipped"].includes(o.status)],
@@ -59,6 +60,7 @@
     const revenue = orders.filter((o) => o.status === "done").reduce((s, o) => s + V.cost(o).totalLei, 0);
     $("#admKpis").innerHTML = `
       <div class="kpi${cnt(g("new")) ? " kpi-red" : ""}"><small>Назначить цену</small><b>${cnt(g("new"))}</b></div>
+      <div class="kpi${cnt(g("check")) ? " kpi-red" : ""}"><small>Проверить оплату</small><b>${cnt(g("check"))}</b></div>
       <div class="kpi"><small>Ждут клиента</small><b>${cnt(g("priced"))}</b></div>
       <div class="kpi"><small>В дороге</small><b>${cnt((o) => o.status === "shipped")}</b></div>
       <div class="kpi"><small>Выдано на сумму</small><b>${U.lei(revenue)}</b></div>`;
@@ -77,7 +79,7 @@
               <span class="ar-client"><b>${esc(o.name || "—")}</b><small>${esc(o.telegram || "")}${o.code ? ` · ${esc(o.code)}` : ""}</small></span>
               <span class="ar-what"><svg class="ic"><use href="#i-${o.method === "sea" ? "ship" : "plane"}"/></svg>${(o.links || []).length} ссыл. · ${+o.qty || 1} шт.</span>
               <span class="ar-sum">${c.hasPrice ? U.lei(c.totalLei) : "—"}</span>
-              <span class="pill pill-${o.status}">${esc(V.name(o.status))}</span>
+              <span class="pill pill-${o.status}">${esc(o.paidClaimAt && o.status !== "paid" && GROUPS[2][2](o) ? "Проверить оплату" : V.name(o.status))}</span>
             </button>`;
           })
           .join("")
@@ -130,6 +132,9 @@
     F.weight.value = o.weight ?? "";
     F.finalLei.value = o.finalLei ?? "";
     F.managerNote.value = o.managerNote || "";
+    F.payUrl.value = o.payUrl || "";
+    $("#omPaid").hidden = !o.paidClaimAt;
+    $("#omPaid").innerHTML = o.paidClaimAt ? `Клиент нажал «Я оплатил» ${V.date(o.paidClaimAt)}. Проверьте поступление и поставьте статус «Оплачено».` : "";
     const p = await api.orders.getPrivate(o.id).catch(() => ({}));
     F.partnerTrack.value = p.partnerTrack || "";
     F.partnerLink.value = p.partnerLink || "";
@@ -191,6 +196,7 @@
         weight: num(F.weight.value),
         finalLei: num(F.finalLei.value),
         managerNote: F.managerNote.value.trim(),
+        payUrl: /^https:\/\//i.test(F.payUrl.value.trim()) ? F.payUrl.value.trim() : "",
         photos,
       });
       await api.orders.setPrivate(editing.id, { partnerTrack: F.partnerTrack.value.trim(), partnerLink: F.partnerLink.value.trim(), privateNote: F.privateNote.value.trim() });
