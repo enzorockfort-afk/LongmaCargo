@@ -206,6 +206,15 @@
     }
   });
   $("#outBtn").addEventListener("click", () => api.auth.signOut());
+  $("#delBtn").addEventListener("click", async () => {
+    if (!confirm(U.t("acc.delQ", "Удалить аккаунт? Войти в него больше не получится."))) return;
+    try {
+      await api.auth.deleteAccount();
+      toast(U.t("acc.deleted", "Аккаунт удалён"));
+    } catch (err) {
+      toast(window.LM_DB.errorText(err, U.lang()));
+    }
+  });
   $("#profForm").addEventListener("submit", async (e) => {
     e.preventDefault();
     const F = e.target.elements;

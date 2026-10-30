@@ -74,11 +74,35 @@
         <div><b>Longma Cargo</b><p data-i="ftr.t">Доставка из Китая в Молдову</p></div></div>
       <nav class="ftr-nav" aria-label="Разделы">${NAV.map(([h, , i, t]) => `<a href="${h}" data-i="${i}">${t}</a>`).join("")}<a href="order.html" data-i="nav.order">Заявка</a></nav>
       <a class="ftr-tg" href="${tgUrl()}" target="_blank" rel="noopener"><svg class="ic"><use href="#i-tg"/></svg><span><small data-i="ftr.mgr">Менеджер в Telegram</small>@${C.telegram}</span></a>
-      <p class="ftr-c">© ${new Date().getFullYear()} Longma</p>
+      <nav class="ftr-legal" aria-label="Документы">
+        <a href="privacy.html" data-i="lg.privacy">Персональные данные</a><a href="terms.html" data-i="lg.terms">Условия</a><a href="returns.html" data-i="lg.returns">Возврат и претензии</a><a href="cookies.html" data-i="lg.cookies">Куки</a>
+      </nav>
+      <p class="ftr-c">© ${new Date().getFullYear()} Longma${C.operator && C.operator.name ? ` · ${C.operator.name}${C.operator.idno ? `, IDNO ${C.operator.idno}` : ""}` : ""}. <span data-i="ftr.brands">Товарные знаки принадлежат их владельцам. Longma — посредник в выкупе и доставке.</span></p>
     </div>
   </footer>
   <a class="tg-fab" href="${tgUrl()}" target="_blank" rel="noopener" aria-label="Написать менеджеру в Telegram"><svg class="ic"><use href="#i-tg"/></svg><span data-i="fab">Написать менеджеру</span></a>`
   );
+
+  /* уведомление о куки: используются только необходимые, поэтому достаточно сообщить */
+  let cookieSeen = false;
+  try {
+    cookieSeen = localStorage.getItem("lm-cookies") === "1";
+  } catch (e) {}
+  if (!cookieSeen) {
+    document.body.insertAdjacentHTML(
+      "beforeend",
+      `<div class="cookie" id="cookie" role="region" aria-label="Куки">
+        <p><span data-i="ck.t">Сайт использует только необходимые куки — для входа в кабинет и выбора языка. Рекламы и слежки нет.</span> <a href="cookies.html" data-i="ck.more">Подробнее</a></p>
+        <button class="btn btn-ink btn-sm" type="button" id="cookieOk" data-i="ck.ok">Понятно</button>
+      </div>`
+    );
+    $("#cookieOk").addEventListener("click", () => {
+      try {
+        localStorage.setItem("lm-cookies", "1");
+      } catch (e) {}
+      $("#cookie").remove();
+    });
+  }
 
   const hdr = $("#hdr");
   addEventListener("scroll", () => hdr.classList.toggle("scrolled", scrollY > 8), { passive: true });
@@ -93,10 +117,10 @@
   /* ---------------- язык: русский текст берётся из страницы, румынский — из словаря ---------------- */
   const RO = window.LONGMA_RO || {};
   const MSG = {
-    ru: { lei: "≈ {n} лей", rate: "≈ {n} лей за кг по курсу {r}", err: "Заполните ссылки, имя и Telegram", sent: "Заявка скопирована и открыта в Telegram — нажмите «Отправить»",
+    ru: { lei: "≈ {n} лей", rate: "≈ {n} лей за кг по курсу {r}", err: "Заполните ссылки, имя и Telegram", agree: "Отметьте согласие с условиями и политикой",sent: "Заявка скопирована и открыта в Telegram — нажмите «Отправить»",
           air: "Самолёт", sea: "Море", order: "Заявка Longma", links: "Ссылки", size: "Размер/цвет", qty: "Кол-во", method: "Доставка", name: "Имя", note: "Комментарий",
           days: "дней", forW: "за {w} кг", day: "день {d} в пути", km: "{n} км", hello: "Здравствуйте! Вопрос по доставке из Китая" },
-    ro: { lei: "≈ {n} lei", rate: "≈ {n} lei pe kg la cursul {r}", err: "Completează linkurile, numele și Telegram", sent: "Cererea a fost copiată și deschisă în Telegram — apasă «Trimite»",
+    ro: { lei: "≈ {n} lei", rate: "≈ {n} lei pe kg la cursul {r}", err: "Completează linkurile, numele și Telegram", agree: "Bifează acordul cu condițiile și politica",sent: "Cererea a fost copiată și deschisă în Telegram — apasă «Trimite»",
           air: "Avion", sea: "Maritim", order: "Cerere Longma", links: "Linkuri", size: "Mărime/culoare", qty: "Cantitate", method: "Livrare", name: "Nume", note: "Comentariu",
           days: "zile", forW: "pentru {w} kg", day: "ziua {d} pe drum", km: "{n} km", hello: "Bună ziua! O întrebare despre livrarea din China" },
   };
@@ -317,6 +341,11 @@
         bad.forEach((n) => F[n].setAttribute("aria-invalid", "true"));
         (items.length ? F[bad[0]] : $("[name=iLink]", list)).focus();
         $("#err").textContent = m("err");
+        return;
+      }
+      if (!F.agree.checked) {
+        F.agree.focus();
+        $("#err").textContent = m("agree");
         return;
       }
       const method = F.method.value;

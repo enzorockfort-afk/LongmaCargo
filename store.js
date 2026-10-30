@@ -85,6 +85,12 @@
             current = null;
             emit();
           },
+          async deleteAccount() {
+            write(K.users, read(K.users, []).filter((u) => u.uid !== current.uid));
+            localStorage.removeItem(K.session);
+            current = null;
+            emit();
+          },
           async updateProfile(patch) {
             const l = read(K.users, []);
             const u = l.find((x) => x.uid === current.uid);
@@ -185,6 +191,12 @@
               return current;
             },
             signOut: () => auth.signOut(),
+            // профиль удаляется сразу; Firebase может попросить войти заново, если вход был давно
+            async deleteAccount() {
+              const fu = auth.currentUser;
+              await db.doc(`users/${fu.uid}`).delete(); // пока вход ещё действует — иначе правила не пустят
+              await fu.delete();
+            },
             async updateProfile(patch) {
               await db.doc(`users/${current.uid}`).set(patch, { merge: true });
               current = { ...current, ...patch };
@@ -248,7 +260,8 @@
     "auth/user-not-found": ["Неверный email или пароль", "Email sau parolă greșită"],
     "auth/weak-password": ["Пароль слишком короткий — минимум 6 символов", "Parola e prea scurtă — minim 6 caractere"],
     "auth/invalid-email": ["Проверьте email", "Verifică emailul"],
-    "auth/network-request-failed": ["Нет интернета — попробуйте ещё раз", "Fără internet — încearcă din nou"],
+    "auth/requires-recent-login": ["Для удаления войдите в аккаунт заново и сразу повторите", "Pentru ștergere intră din nou în cont și repetă imediat"],
+    "auth/network-request-failed":["Нет интернета — попробуйте ещё раз", "Fără internet — încearcă din nou"],
     "permission-denied": ["Нет доступа", "Fără acces"],
   };
   window.LM_DB = {
