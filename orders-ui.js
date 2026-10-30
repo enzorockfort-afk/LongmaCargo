@@ -43,5 +43,26 @@
     }).join("")}</ol>`;
   }
 
-  window.LM_VIEW = { esc, name, date, method, cost, progress, timeline, PATH };
+  /* товары заказа; у старых заказов вместо товаров был список ссылок и общий размер */
+  const itemsOf = (o) =>
+    o.items && o.items.length ? o.items : (o.links || []).map((link, i) => ({ link, size: i === 0 ? o.size || "" : "", color: "", qty: i === 0 ? +o.qty || 1 : 1 }));
+  const host = (u) => {
+    try {
+      return new URL(u).hostname.replace(/^(www|m)\./, "");
+    } catch (e) {
+      return u.length > 40 ? u.slice(0, 40) + "…" : u;
+    }
+  };
+  function itemsList(o) {
+    return `<ol class="ilist">${itemsOf(o)
+      .map((it) => {
+        const isUrl = /^https?:\/\//i.test(it.link);
+        const name = isUrl ? `<a href="${esc(it.link)}" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-link"/></svg>${esc(host(it.link))}</a>` : `<b>${esc(it.link)}</b>`;
+        const meta = [it.size && `${esc(U().t("f.size1", "Размер"))}: ${esc(it.size)}`, it.color && `${esc(U().t("f.color", "Цвет"))}: ${esc(it.color)}`, `× ${+it.qty || 1}`].filter(Boolean).join(" · ");
+        return `<li>${name}<small>${meta}</small></li>`;
+      })
+      .join("")}</ol>`;
+  }
+
+  window.LM_VIEW = { esc, name, date, method, cost, progress, timeline, itemsOf, itemsList, PATH };
 })();

@@ -106,5 +106,7 @@ window.LONGMA_RO = {
   "f.loginHint": "Intră în cont — comanda primește un număr de urmărire, iar statusul se vede pe site.", "f.login": "Intră sau înregistrează-te",
   "pay.due": "De plată", "pay.card": "Achită cu cardul", "pay.done": "Am achitat", "pay.checking": "Plata se verifică",
   "pay.or": "Sau prin transfer", "pay.ref": "În comentariu indică numărul comenzii", "pay.thanks": "Mulțumim! Managerul verifică plata și cumpără comanda",
-  "f.inHint":"Comanda se salvează în contul tău, managerul îți trimite prețul.", "f.create": "Plasează comanda",
+  "f.items": "Produse", "f.addItem": "Adaugă un produs", "f.link": "Linkul produsului", "f.linkPh": "https://… sau denumirea",
+  "f.size1": "Mărime", "f.size1Ph": "42, M", "f.color": "Culoare", "f.colorPh": "negru",
+  "f.inHint": "Comanda se salvează în contul tău, managerul îți trimite prețul.", "f.create": "Plasează comanda",
 };

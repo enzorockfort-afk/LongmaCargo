@@ -13,13 +13,6 @@
     clearTimeout(toast.t);
     toast.t = setTimeout(() => (t.hidden = true), 3200);
   }
-  const host = (u) => {
-    try {
-      return new URL(u).hostname.replace(/^(www|m)\./, "");
-    } catch (e) {
-      return u.slice(0, 32);
-    }
-  };
 
   /* ---------------- вход и регистрация ---------------- */
   document.querySelectorAll("[name=authTab]").forEach((r) =>
@@ -98,8 +91,8 @@
       ${V.progress(o)}
       <div class="oc-body">
         <div class="oc-items">
-          ${(o.links || []).map((l) => `<a href="${esc(l)}" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-link"/></svg>${esc(host(l))}</a>`).join("")}
-          <p>${[o.size && esc(o.size), `${esc(U.t("f.qty", "Количество"))}: ${+o.qty || 1}`, `<svg class="ic"><use href="#i-${o.method === "sea" ? "ship" : "plane"}"/></svg>${esc(V.method(o.method))}`].filter(Boolean).join(" · ")}</p>
+          ${V.itemsList(o)}
+          <p><svg class="ic"><use href="#i-${o.method === "sea" ? "ship" : "plane"}"/></svg>${esc(V.method(o.method))}</p>
           ${o.note ? `<p class="oc-note">${esc(o.note)}</p>` : ""}
         </div>
         <dl class="oc-cost">

@@ -264,13 +264,58 @@
     const q = new URLSearchParams(location.search);
     if (q.get("m") === "sea") F.method.value = "sea";
     form.addEventListener("input", (e) => e.target.removeAttribute("aria-invalid"));
+
+    /* товары: у каждого своя ссылка, размер, цвет и количество; «+» добавляет ещё */
+    const list = $("#items");
+    const itemRow = () =>
+      `<li class="item">
+        <span class="item-n"></span>
+        <label class="field item-link"><span data-i="f.link">Ссылка на товар</span><input name="iLink" inputmode="url" autocomplete="off" data-ph="f.linkPh" placeholder="https://… или название"></label>
+        <label class="field"><span data-i="f.size1">Размер</span><input name="iSize" data-ph="f.size1Ph" placeholder="42, M"></label>
+        <label class="field"><span data-i="f.color">Цвет</span><input name="iColor" data-ph="f.colorPh" placeholder="чёрный"></label>
+        <label class="field item-qty"><span data-i="f.qty">Количество</span>
+          <span class="qty"><button type="button" data-step="-1" aria-label="Меньше">−</button><input name="iQty" type="number" inputmode="numeric" min="1" value="1"><button type="button" data-step="1" aria-label="Больше">+</button></span></label>
+        <button type="button" class="item-x" data-rm aria-label="Убрать товар"><svg class="ic"><use href="#i-close"/></svg></button>
+      </li>`;
+    const renumber = () =>
+      $$(".item", list).forEach((li, i, all) => {
+        $(".item-n", li).textContent = i + 1;
+        $(".item-x", li).hidden = all.length < 2;
+      });
+    function addItem(focus) {
+      list.insertAdjacentHTML("beforeend", itemRow());
+      window.LM_UI.apply(list.lastElementChild);
+      renumber();
+      if (focus) $("[name=iLink]", list.lastElementChild).focus();
+    }
+    addItem(false);
+    $("#addItem").addEventListener("click", () => addItem(true));
+    list.addEventListener("click", (e) => {
+      const st = e.target.closest("[data-step]");
+      if (st) {
+        const inp = $("[name=iQty]", st.closest(".qty"));
+        inp.value = Math.max(1, (+inp.value || 1) + +st.dataset.step);
+      }
+      if (e.target.closest("[data-rm]")) e.target.closest(".item").remove(), renumber();
+    });
+    const readItems = () =>
+      $$(".item", list).map((li) => ({
+        link: $("[name=iLink]", li).value.trim(),
+        size: $("[name=iSize]", li).value.trim(),
+        color: $("[name=iColor]", li).value.trim(),
+        qty: Math.max(1, Math.round(+$("[name=iQty]", li).value || 1)),
+      }));
+
     form.addEventListener("submit", (e) => {
       e.preventDefault();
       const v = (n) => String(F[n].value || "").trim();
-      const bad = ["links", "name", "tg"].filter((n) => v(n).length < 2);
-      if (bad.length) {
+      // пустые строки товаров не считаются; хотя бы один товар обязателен
+      const items = readItems().filter((it) => it.link);
+      const bad = ["name", "tg"].filter((n) => v(n).length < 2);
+      if (!items.length) $("[name=iLink]", list).setAttribute("aria-invalid", "true");
+      if (bad.length || !items.length) {
         bad.forEach((n) => F[n].setAttribute("aria-invalid", "true"));
-        F[bad[0]].focus();
+        (items.length ? F[bad[0]] : $("[name=iLink]", list)).focus();
         $("#err").textContent = m("err");
         return;
       }
@@ -278,16 +323,14 @@
       const text = [
         m("order"),
         "",
-        `${m("links")}:`,
-        ...v("links").split(/\s+/).filter(Boolean),
-        v("size") && `${m("size")}: ${v("size")}`,
-        `${m("qty")}: ${Math.max(1, +v("qty") || 1)}`,
+        ...items.map((it, i) => `${i + 1}. ${it.link}${[it.size, it.color].filter(Boolean).length ? ` — ${[it.size, it.color].filter(Boolean).join(", ")}` : ""} × ${it.qty}`),
+        "",
         `${m("method")}: ${m(method)} (${C.methods[method].days} ${m("days")})`,
         `${m("name")}: ${v("name")}`,
         `Telegram: ${v("tg")}`,
-        v("note") && `${m("note")}: ${v("note")}`,
+        v("note") ? `${m("note")}: ${v("note")}` : null,
       ]
-        .filter((x, i) => x || i === 1)
+        .filter((x) => x !== null)
         .join("\n");
       $("#err").textContent = "";
       const api = window.LM_DB && window.LM_DB.api;
@@ -298,9 +341,10 @@
         btn.disabled = true;
         api.orders
           .create({
-            links: v("links").split(/\s+/).filter(Boolean),
-            size: v("size"),
-            qty: Math.max(1, +v("qty") || 1),
+            items,
+            // для совместимости со старыми заказами
+            links: items.map((it) => it.link),
+            qty: items.reduce((s, it) => s + it.qty, 0),
             method,
             note: v("note"),
             name: v("name"),

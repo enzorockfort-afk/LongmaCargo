@@ -31,13 +31,6 @@
     const u = String(t || "").trim().replace(/^https?:\/\/t\.me\//i, "").replace(/^@/, "");
     return /^[A-Za-z0-9_]{4,32}$/.test(u) ? `https://t.me/${u}` : "";
   };
-  const host = (u) => {
-    try {
-      return new URL(u).hostname.replace(/^(www|m)\./, "");
-    } catch (e) {
-      return u.slice(0, 40);
-    }
-  };
 
   /* ---------------- вход ---------------- */
   $("#admIn").addEventListener("submit", async (e) => {
@@ -77,7 +70,7 @@
             return `<button type="button" class="arow" data-open="${esc(o.id)}">
               <span class="ar-main"><b class="mono-num">${esc(o.track)}</b><small>${V.date(o.createdAt)}</small></span>
               <span class="ar-client"><b>${esc(o.name || "—")}</b><small>${esc(o.telegram || "")}${o.code ? ` · ${esc(o.code)}` : ""}</small></span>
-              <span class="ar-what"><svg class="ic"><use href="#i-${o.method === "sea" ? "ship" : "plane"}"/></svg>${(o.links || []).length} ссыл. · ${+o.qty || 1} шт.</span>
+              <span class="ar-what"><svg class="ic"><use href="#i-${o.method === "sea" ? "ship" : "plane"}"/></svg>${V.itemsOf(o).length} тов. · ${V.itemsOf(o).reduce((s, it) => s + (+it.qty || 1), 0)} шт.</span>
               <span class="ar-sum">${c.hasPrice ? U.lei(c.totalLei) : "—"}</span>
               <span class="pill pill-${o.status}">${esc(o.paidClaimAt && o.status !== "paid" && GROUPS[2][2](o) ? "Проверить оплату" : V.name(o.status))}</span>
             </button>`;
@@ -124,8 +117,7 @@
     $("#omTitle").textContent = o.track;
     const tg = tgLink(o.telegram);
     $("#omClient").innerHTML = `<b>${esc(o.name || "—")}</b> <span>${esc(o.code || "")}</span><br><span>Telegram: ${tg ? `<a href="${tg}" target="_blank" rel="noopener">${esc(o.telegram)}</a>` : esc(o.telegram || "—")}</span>`;
-    $("#omItems").innerHTML = `${(o.links || []).map((l) => `<a href="${esc(l)}" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-link"/></svg>${esc(host(l))}</a>`).join("")}
-      <p>${[o.size && `Размер/цвет: ${esc(o.size)}`, `Кол-во: ${+o.qty || 1}`, o.note && `Комментарий: ${esc(o.note)}`].filter(Boolean).join("<br>")}</p>`;
+    $("#omItems").innerHTML = `${V.itemsList(o)}${o.note ? `<p>Комментарий: ${esc(o.note)}</p>` : ""}`;
     F.status.value = o.status;
     F.method.value = o.method || "air";
     F.goodsCny.value = o.goodsCny ?? "";

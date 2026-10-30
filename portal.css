@@ -203,3 +203,30 @@ button.arow:hover { box-shadow: inset 0 0 0 2px var(--ink); }
   .nav-tg { display: flex; align-items: center; gap: 10px; margin-top: 8px; color: #fff !important; background: #2AABEE !important; }
   .burger { display: block; }
 }
+
+/* товары в заявке */
+.items { list-style: none; display: grid; gap: 10px; margin: 0; padding: 0; }
+.item { position: relative; display: grid; grid-template-columns: 1fr 1fr 140px; gap: 10px; padding: 14px 14px 14px 46px; border-radius: 18px; background: var(--paper-2); }
+.item .field > span { font-size: 12.5px; }
+.item input { min-height: 46px; }
+.item-n { position: absolute; left: 12px; top: 14px; display: grid; place-items: center; width: 24px; height: 24px; border-radius: 8px; background: var(--ink); color: var(--paper); font: 800 12px var(--display); }
+.item-x { position: absolute; right: 8px; top: 8px; display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; color: var(--mute); }
+.item-x:hover { background: var(--card); color: var(--red); }
+.item-x .ic { width: 16px; height: 16px; }
+.item:has(.item-x:not([hidden])) { padding-right: 40px; }
+.qty { display: grid; grid-template-columns: 38px 1fr 38px; gap: 4px; }
+.qty button { border-radius: 12px; background: var(--card); box-shadow: inset 0 0 0 1.5px var(--line); font-weight: 800; font-size: 18px; }
+.qty button:hover { box-shadow: inset 0 0 0 1.5px var(--ink); }
+.qty input { text-align: center; padding: 0 4px; font-weight: 800; }
+.add-item { width: fit-content; }
+.ilist { list-style: none; display: grid; gap: 8px; margin: 0; padding: 0; counter-reset: it; }
+.ilist li { display: grid; gap: 3px; padding-left: 28px; position: relative; counter-increment: it; }
+.ilist li::before { content: counter(it); position: absolute; left: 0; top: 4px; display: grid; place-items: center; width: 20px; height: 20px; border-radius: 6px; background: var(--paper-2); font: 800 11px var(--display); }
+.ilist small { color: var(--ink-2); font-size: 13px; font-weight: 600; }
+@media (max-width: 760px) {
+  .item { grid-template-columns: 1fr 1fr; }
+  .item-link { grid-column: 1 / -1; }
+  .item-qty { grid-column: 1 / -1; }
+}
+.item-link { grid-column: 1 / -1; }
+@media (max-width: 760px) { .item { grid-template-columns: 1fr 1fr; } }
