@@ -1,40 +1,80 @@
 rules_version = '2';
-// Правила для Firebase проекта Longma.
-// Firebase Console → Firestore Database → Rules → вставить весь текст → Publish.
+// Правила базы Longma. Загружаются командой: firebase deploy --only firestore:rules
+// Главный принцип: клиент может записать только свои данные и только разрешённые поля;
+// цену, статусы, фото и ссылку на оплату ставит только администратор.
 service cloud.firestore {
   match /databases/{database}/documents {
     function signedIn() { return request.auth != null; }
     function isAdmin() { return signedIn() && exists(/databases/$(database)/documents/admins/$(request.auth.uid)); }
+    function str(v, max) { return v is string && v.size() <= max; }
+    function optStr(d, k, max) { return !(k in d) || str(d[k], max); }
 
-    // админы назначаются вручную в консоли: документ admins/{uid}
-    match /admins/{uid} { allow read: if signedIn() && request.auth.uid == uid; }
-
-    // профиль клиента: имя, телефон, Telegram, код клиента
-    match /users/{uid} {
-      allow read, write: if signedIn() && request.auth.uid == uid;
-      allow read: if isAdmin();
+    // админы назначаются только вручную в консоли Firebase: документ admins/{uid}
+    match /admins/{uid} {
+      allow read: if signedIn() && request.auth.uid == uid;
+      allow write: if false;
     }
 
-    // заказы: клиент создаёт и видит свои; сам может только подтвердить цену или отменить
+    // профиль клиента: только свои поля, код клиента после создания не меняется
+    match /users/{uid} {
+      function okProfile(d) {
+        return d.keys().hasOnly(['email', 'name', 'phone', 'telegram', 'code', 'createdAt'])
+          && optStr(d, 'email', 120) && optStr(d, 'name', 80) && optStr(d, 'phone', 40)
+          && optStr(d, 'telegram', 80) && optStr(d, 'code', 16);
+      }
+      allow read: if (signedIn() && request.auth.uid == uid) || isAdmin();
+      allow create: if signedIn() && request.auth.uid == uid && okProfile(request.resource.data);
+      allow update: if signedIn() && request.auth.uid == uid && okProfile(request.resource.data)
+        && request.resource.data.get('code', '') == resource.data.get('code', '');
+      allow delete: if (signedIn() && request.auth.uid == uid) || isAdmin();
+    }
+
+    // заказы
     match /orders/{id} {
-      allow create: if signedIn() && request.resource.data.uid == request.auth.uid && request.resource.data.status == 'new';
+      // клиент создаёт заказ только от своего имени, со статусом «новый» и без цены, фото и ссылок на оплату
+      function okNew(d) {
+        return d.keys().hasOnly(['uid', 'code', 'track', 'status', 'history', 'createdAt',
+                                 'items', 'links', 'qty', 'method', 'note', 'name', 'telegram'])
+          && d.uid == request.auth.uid
+          && d.status == 'new'
+          && d.history is list && d.history.size() == 1
+          && str(d.track, 12) && d.track.matches('LM[0-9]{8}')
+          && d.method in ['air', 'sea']
+          && d.items is list && d.items.size() >= 1 && d.items.size() <= 30
+          && d.links is list && d.links.size() <= 30
+          && d.qty is int && d.qty >= 1 && d.qty <= 1000
+          && optStr(d, 'note', 1000) && optStr(d, 'name', 80) && optStr(d, 'telegram', 80) && optStr(d, 'code', 16);
+      }
+      allow create: if signedIn() && okNew(request.resource.data);
       allow read: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid);
+      // сам клиент может только подтвердить цену, сообщить об оплате или отменить
       allow update: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid
-        && request.resource.data.uid == resource.data.uid
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'history', 'updatedAt', 'paidClaimAt'])
-        && request.resource.data.status in ['confirmed', 'cancelled']);
+        && request.resource.data.status in ['confirmed', 'cancelled']
+        && (request.resource.data.status == resource.data.status
+            || (resource.data.status in ['new', 'priced'] && request.resource.data.status == 'cancelled')
+            || (resource.data.status == 'priced' && request.resource.data.status == 'confirmed')));
       allow delete: if isAdmin();
     }
 
     // публичный трекер по номеру: только статус и даты, без личных данных
     match /tracks/{track} {
+      function okTrack(d) {
+        return d.keys().hasOnly(['track', 'uid', 'status', 'history', 'method', 'createdAt'])
+          && d.uid == request.auth.uid && d.track == track && d.history is list && d.history.size() <= 30;
+      }
       allow get: if true;
       allow list: if false;
-      allow create, update: if isAdmin() || (signedIn() && request.resource.data.uid == request.auth.uid);
+      allow create: if isAdmin() || (signedIn() && okTrack(request.resource.data) && request.resource.data.status == 'new');
+      allow update: if isAdmin() || (signedIn() && resource.data.uid == request.auth.uid && okTrack(request.resource.data)
+        && request.resource.data.status in ['confirmed', 'cancelled']);
       allow delete: if isAdmin();
     }
 
     // заметки администратора (например, трек партнёра) — клиент их не видит
     match /private/{id} { allow read, write: if isAdmin(); }
+
+    // всё остальное закрыто
+    match /{other=**} { allow read, write: if false; }
   }
 }

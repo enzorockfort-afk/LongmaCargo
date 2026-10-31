@@ -64,5 +64,9 @@
       .join("")}</ol>`;
   }
 
-  window.LM_VIEW = { esc, name, date, method, cost, progress, timeline, itemsOf, itemsList, PATH };
+  /* фото показываем только если это настоящая картинка (сжатая в браузере), любой другой текст отбрасываем */
+  const safeImg = (p) => (typeof p === "string" && /^data:image\/(jpeg|png|webp);base64,[A-Za-z0-9+/=]+$/.test(p) ? p : "");
+  const safeUrl = (u) => (typeof u === "string" && /^https:\/\//i.test(u) ? u : "");
+
+  window.LM_VIEW = { esc, name, date, method, cost, progress, timeline, itemsOf, itemsList, safeImg, safeUrl, PATH };
 })();

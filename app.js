@@ -268,6 +268,7 @@
       $("#outW").textContent = m("forW", { w: fmt(w, 1) });
       $$(".presets button").forEach((b) => b.setAttribute("aria-pressed", String(+b.dataset.w === raw)));
     };
+    calcForm.addEventListener("submit", (e) => e.preventDefault());
     calcForm.addEventListener("input", calc);
     calcForm.addEventListener("change", calc);
     $$("[data-kg]").forEach((b) =>

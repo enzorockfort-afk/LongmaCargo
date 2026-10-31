@@ -108,12 +108,12 @@
     $("#omCalc").innerHTML = `Товар ${U.fmt(c.goods)} ¥ + доставка ${c.w ? `${U.fmt(Math.max(1, c.w), 2)} кг × ${c.per} ¥ = ${U.fmt(c.ship)} ¥` : "— (нет веса)"} → <b>${U.lei(c.totalLei)}</b> по курсу ${U.fmt(C.rate, 2)}`;
   }
   function drawPhotos() {
-    $("#omPhotos").innerHTML = photos.map((p, i) => `<span class="om-ph"><img src="${p}" alt="Фото ${i + 1}"><button type="button" data-rmph="${i}" aria-label="Удалить фото ${i + 1}"><svg class="ic"><use href="#i-close"/></svg></button></span>`).join("");
+    $("#omPhotos").innerHTML = photos.map((p, i) => `<span class="om-ph"><img src="${esc(V.safeImg(p))}" alt="Фото ${i + 1}"><button type="button" data-rmph="${i}" aria-label="Удалить фото ${i + 1}"><svg class="ic"><use href="#i-close"/></svg></button></span>`).join("");
     $(".om-add").hidden = photos.length >= 4;
   }
   async function open(o) {
     editing = o;
-    photos = [...(o.photos || [])];
+    photos = (o.photos || []).filter(V.safeImg);
     $("#omTitle").textContent = o.track;
     const tg = tgLink(o.telegram);
     $("#omClient").innerHTML = `<b>${esc(o.name || "—")}</b> <span>${esc(o.code || "")}</span><br><span>Telegram: ${tg ? `<a href="${tg}" target="_blank" rel="noopener">${esc(o.telegram)}</a>` : esc(o.telegram || "—")}</span>`;

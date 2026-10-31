@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebaseapp.com; frame-src https://*.firebaseapp.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Тарифы и калькулятор — Longma</title>
   <meta name="description" content="Доставка из Китая в Молдову: самолёт 120 ¥ за кг, 14–20 дней; море 50 ¥ за кг, 45–60 дней. Отправка от 1 кг.">
   <meta name="theme-color" content="#F8EFE0">
@@ -10,8 +12,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=13">
-  <link rel="stylesheet" href="portal.css?v=13">
+  <link rel="stylesheet" href="styles.css?v=14">
+  <link rel="stylesheet" href="portal.css?v=14">
 </head>
 <body data-page="rates">
 <main id="main">
@@ -39,7 +41,7 @@
         <a class="btn btn-ink" href="order.html?m=sea"><span data-i="rates.pickSea">Заказать морем</span></a>
       </article>
 
-      <form class="calc" id="calc" onsubmit="return false" aria-labelledby="calcH">
+      <form class="calc" id="calc" aria-labelledby="calcH">
         <h2 class="rate-h" id="calcH" data-i="calc.h">Посчитайте свою посылку</h2>
         <div class="seg" role="radiogroup" aria-label="Способ доставки">
           <label><input type="radio" name="m" value="air" checked><span><svg class="ic"><use href="#i-plane"/></svg><span data-i="rates.air">Самолёт</span></span></label>
@@ -73,9 +75,9 @@
     </ul>
   </section>
 </main>
-<script src="config.js?v=13"></script>
-<script src="i18n.js?v=13"></script>
-<script src="store.js?v=13"></script>
-<script src="app.js?v=13"></script>
+<script src="config.js?v=14"></script>
+<script src="i18n.js?v=14"></script>
+<script src="store.js?v=14"></script>
+<script src="app.js?v=14"></script>
 </body>
 </html>

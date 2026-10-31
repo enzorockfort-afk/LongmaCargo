@@ -3,6 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebaseapp.com; frame-src https://*.firebaseapp.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Отследить посылку — Longma</title>
   <meta name="description" content="Узнайте, где ваша посылка из Китая: введите номер заказа Longma.">
   <meta name="theme-color" content="#F8EFE0">
@@ -10,8 +12,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=13">
-  <link rel="stylesheet" href="portal.css?v=13">
+  <link rel="stylesheet" href="styles.css?v=14">
+  <link rel="stylesheet" href="portal.css?v=14">
 </head>
 <body data-page="track">
 <main id="main">
@@ -28,55 +30,11 @@
     <div id="trkOut" aria-live="polite"></div>
   </section>
 </main>
-<script src="config.js?v=13"></script>
-<script src="i18n.js?v=13"></script>
-<script src="store.js?v=13"></script>
-<script src="app.js?v=13"></script>
-<script src="orders-ui.js?v=13"></script>
-<script>
-(function () {
-  const V = window.LM_VIEW, U = window.LM_UI;
-  const out = document.getElementById("trkOut");
-  const input = document.getElementById("trkIn");
-  let last = null;
-
-  function show(t, r) {
-    if (r === undefined) return (out.innerHTML = "");
-    if (!r) {
-      out.innerHTML = `<div class="trk-empty"><span class="crop crop-panda"><img src="assets/panda.webp" alt=""></span>
-        <div><b>${V.esc(U.t("trk.none", "Заказ не найден"))}</b><p>${V.esc(U.t("trk.noneT", "Проверьте номер. Если заказ только оформлен, номер есть в личном кабинете."))}</p></div></div>`;
-      return;
-    }
-    out.innerHTML = `<article class="trk-card">
-      <header><div><small>${V.esc(U.t("trk.num", "Заказ"))}</small><b class="mono-num">${V.esc(r.track)}</b></div>
-        <span class="pill pill-${r.status}">${V.esc(V.name(r.status))}</span></header>
-      ${V.progress(r)}
-      <div class="trk-meta">
-        <span><svg class="ic"><use href="#i-${r.method === "sea" ? "ship" : "plane"}"/></svg>${V.esc(V.method(r.method))}</span>
-        <span>${V.esc(U.t("trk.from", "Оформлен"))} ${V.date(r.createdAt)}</span>
-      </div>
-      ${V.timeline(r)}
-    </article>`;
-  }
-
-  async function find(t) {
-    t = String(t || "").trim().toUpperCase();
-    if (!t) return input.focus();
-    last = t;
-    out.innerHTML = `<div class="trk-card sk"></div>`;
-    try {
-      const api = await window.LM_DB.ready;
-      show(t, await api.orders.byTrack(t));
-      history.replaceState(null, "", "?t=" + encodeURIComponent(t));
-    } catch (e) {
-      out.innerHTML = `<p class="err">${V.esc(window.LM_DB.errorText(e, U.lang()))}</p>`;
-    }
-  }
-  document.getElementById("trkForm").addEventListener("submit", (e) => (e.preventDefault(), find(input.value)));
-  U.onLang(() => last && find(last));
-  const q = new URLSearchParams(location.search).get("t");
-  if (q) (input.value = q), find(q);
-})();
-</script>
+<script src="config.js?v=14"></script>
+<script src="i18n.js?v=14"></script>
+<script src="store.js?v=14"></script>
+<script src="app.js?v=14"></script>
+<script src="orders-ui.js?v=14"></script>
+<script src="track.js?v=14"></script>
 </body>
 </html>

@@ -67,7 +67,7 @@
     return `<div class="oc-pay">
       <div class="oc-pay-sum"><small>${esc(U.t("pay.due", "К оплате"))}</small><b>${U.lei(c.totalLei)}</b></div>
       <div class="oc-pay-acts">
-        ${o.payUrl ? `<a class="btn btn-red btn-sm" href="${esc(o.payUrl)}" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-card"/></svg><span>${esc(U.t("pay.card", "Оплатить картой"))}</span></a>` : ""}
+        ${V.safeUrl(o.payUrl) ? `<a class="btn btn-red btn-sm" href="${esc(V.safeUrl(o.payUrl))}" target="_blank" rel="noopener noreferrer"><svg class="ic"><use href="#i-card"/></svg><span>${esc(U.t("pay.card", "Оплатить картой"))}</span></a>` : ""}
         ${o.paidClaimAt
           ? `<span class="pill pill-confirmed">${esc(U.t("pay.checking", "Оплата на проверке"))}</span>`
           : `<button class="btn btn-line btn-sm" data-paid="${esc(o.id)}">${esc(U.t("pay.done", "Я оплатил"))}</button>`}
@@ -104,7 +104,7 @@
       </div>
       ${o.managerNote ? `<p class="oc-mgr"><svg class="ic"><use href="#i-tg"/></svg><span><b>${esc(U.t("acc.mgr", "Менеджер"))}:</b> ${esc(o.managerNote)}</span></p>` : ""}
       ${payBlock(o, c)}
-      ${(o.photos || []).length ? `<div class="oc-photos">${o.photos.map((p, i) => `<button type="button" data-zoom="${i}"><img src="${p}" alt="${esc(U.t("acc.photo", "Фото товара"))} ${i + 1}"></button>`).join("")}</div>` : ""}
+      ${(o.photos || []).filter(V.safeImg).length ? `<div class="oc-photos">${o.photos.filter(V.safeImg).map((p, i) => `<button type="button" data-zoom="${i}"><img src="${esc(p)}" alt="${esc(U.t("acc.photo", "Фото товара"))} ${i + 1}"></button>`).join("")}</div>` : ""}
       ${canConfirm || canCancel ? `<div class="oc-acts">
         ${canConfirm ? `<button class="btn btn-red btn-sm" data-confirm="${esc(o.id)}"><svg class="ic"><use href="#i-check"/></svg><span>${esc(U.t("acc.confirm", "Подтвердить цену"))}</span></button>` : ""}
         ${canCancel ? `<button class="btn btn-line btn-sm" data-cancel="${esc(o.id)}">${esc(U.t("acc.cancel", "Отменить заказ"))}</button>` : ""}
