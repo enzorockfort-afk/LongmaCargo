@@ -6,6 +6,9 @@
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
   const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const page = document.body.dataset.page || "home";
+  // путь до корня сайта: "" для русских страниц, "../" для румынских из папки ro/
+  const ROOT = document.body.dataset.root || "";
+  window.LM_ROOT = ROOT;
   const tgUrl = (text) => `https://t.me/${C.telegram}${text ? "?text=" + encodeURIComponent(text) : ""}`;
 
   /* ---------------- значки: один набор на все страницы ---------------- */
@@ -53,7 +56,7 @@
     "afterbegin",
     `<a class="skip" href="#main" data-i="skip">Перейти к содержимому</a>
   <header class="hdr" id="hdr">
-    <a class="brand" href="index.html" aria-label="Longma Cargo — главная"><span class="crop crop-wide"><img src="assets/logo-wide.webp" alt="Longma Cargo" width="1774" height="887"></span></a>
+    <a class="brand" href="index.html" aria-label="Longma Cargo — главная"><span class="crop crop-wide"><img src="${ROOT}assets/logo-wide.webp" alt="Longma Cargo" width="1774" height="887"></span></a>
     <nav class="nav" id="nav" aria-label="Разделы сайта">
       ${NAV.map(([h, k, i, t]) => `<a href="${h}"${k === page ? ' aria-current="page"' : ""} data-i="${i}">${t}</a>`).join("")}
       <a class="nav-tg" href="${tgUrl()}" target="_blank" rel="noopener"><svg class="ic"><use href="#i-tg"/></svg>@${C.telegram}</a>
@@ -70,7 +73,7 @@
     "beforeend",
     `<footer class="ftr">
     <div class="ftr-in">
-      <div class="ftr-brand"><span class="crop crop-app ftr-logo"><img src="assets/app-icon.webp" alt="" width="1254" height="1254"></span>
+      <div class="ftr-brand"><span class="crop crop-app ftr-logo"><img src="${ROOT}assets/app-icon.webp" alt="" width="1254" height="1254"></span>
         <div><b>Longma Cargo</b><p data-i="ftr.t">Доставка из Китая в Молдову</p></div></div>
       <nav class="ftr-nav" aria-label="Разделы">${NAV.map(([h, , i, t]) => `<a href="${h}" data-i="${i}">${t}</a>`).join("")}<a href="order.html" data-i="nav.order">Заявка</a></nav>
       <a class="ftr-tg" href="${tgUrl()}" target="_blank" rel="noopener"><svg class="ic"><use href="#i-tg"/></svg><span><small data-i="ftr.mgr">Менеджер в Telegram</small>@${C.telegram}</span></a>
@@ -124,14 +127,19 @@
           air: "Avion", sea: "Maritim", order: "Cerere Longma", links: "Linkuri", size: "Mărime/culoare", qty: "Cantitate", method: "Livrare", name: "Nume", note: "Comentariu",
           days: "zile", forW: "pentru {w} kg", day: "ziua {d} pe drum", km: "{n} km", hello: "Bună ziua! O întrebare despre livrarea din China" },
   };
-  let lang = "ru";
+  /* У каждой страницы своя языковая версия: русская в корне, румынская в папке ro/ (её собирает build.js).
+     Язык берётся из самой страницы; кнопка RO/RU переходит на другую версию. */
+  const lang = document.body.dataset.lang === "ro" ? "ro" : "ru";
+  const file = location.pathname.split("/").pop() || "index.html";
+  const otherLangUrl = () => (lang === "ro" ? ROOT : "ro/") + file + location.search + location.hash;
+  let wanted = null;
   try {
-    lang = new URLSearchParams(location.search).get("lang") || localStorage.getItem("lm-lang") || ((navigator.language || "").startsWith("ro") ? "ro" : "ru");
+    wanted = new URLSearchParams(location.search).get("lang") || localStorage.getItem("lm-lang");
   } catch (e) {}
-  if (lang !== "ro") lang = "ru";
+  // человек раньше выбрал румынский — сразу открываем румынскую версию (у админки её нет)
+  if (wanted === "ro" && lang === "ru" && page !== "admin") location.replace(otherLangUrl().replace(/([?&])lang=ro&?/, "$1").replace(/[?&]$/, ""));
   const m = (k, v = {}) => MSG[lang][k].replace(/\{(\w+)\}/g, (_, x) => v[x]);
   const fmt = (n, d = 0) => new Intl.NumberFormat(lang === "ro" ? "ro-RO" : "ru-RU", { maximumFractionDigits: d }).format(n);
-  const titleRu = document.title;
 
   $$("[data-i]").forEach((el) => (el.dataset.ru = el.textContent));
   $$("[data-ph]").forEach((el) => (el.dataset.ruPh = el.placeholder));
@@ -142,7 +150,6 @@
     $$("[data-ph]").forEach((el) => (el.placeholder = lang === "ro" ? RO[el.dataset.ph] ?? el.dataset.ruPh : el.dataset.ruPh));
     $("#lang").textContent = lang === "ro" ? "RU" : "RO";
     $("#lang").setAttribute("aria-label", lang === "ro" ? "Русский язык" : "Limba română");
-    document.title = lang === "ro" && RO["title." + page] ? RO["title." + page] : titleRu;
     $$("[data-lei]").forEach((el) => (el.textContent = m("rate", { n: fmt(+el.dataset.lei * C.rate), r: fmt(C.rate, 2) })));
     $$(".tg-fab, .ftr-tg, .nav-tg").forEach((a) => (a.href = tgUrl(m("hello"))));
     listeners.forEach((f) => f());
@@ -166,12 +173,12 @@
       });
     },
   };
+  $("#lang").hidden = page === "admin"; // у админки только русская версия
   $("#lang").addEventListener("click", () => {
-    lang = lang === "ro" ? "ru" : "ro";
     try {
-      localStorage.setItem("lm-lang", lang);
+      localStorage.setItem("lm-lang", lang === "ro" ? "ru" : "ro");
     } catch (e) {}
-    applyLang();
+    location.href = otherLangUrl();
   });
 
   /* ---------------- накладная: посылка едет по маршруту ---------------- */

@@ -8,6 +8,7 @@
       "firestore.rules",
       "**/.*",
       "**/*.log",
+      "build.js",
       "**/node_modules/**"
     ],
     "cleanUrls": false,

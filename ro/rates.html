@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://www.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: blob:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com https://*.firebaseapp.com; frame-src https://*.firebaseapp.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <title>Tarife livrare din China în Moldova | Longma</title>
+  <meta name="description" content="Livrare din China în Moldova: cu avionul 120 ¥ pe kg (14–20 zile), pe mare 50 ¥ pe kg (45–60 zile), de la 1 kg. Calculator de cost.">
+  <meta name="theme-color" content="#F8EFE0">
+  <link rel="icon" type="image/webp" href="../assets/app-icon.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;700;800;900&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css?v=14">
+  <link rel="stylesheet" href="../portal.css?v=14">
+  <!-- seo: собирается командой node build.js, вручную не править -->
+  <link rel="canonical" href="https://longmacargo.web.app/ro/rates.html">
+  <link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/rates.html">
+  <link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/rates.html">
+  <link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/rates.html">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Longma Cargo">
+  <meta property="og:locale" content="ro_MD">
+  <meta property="og:locale:alternate" content="ru_MD">
+  <meta property="og:title" content="Tarife livrare din China în Moldova | Longma">
+  <meta property="og:description" content="Livrare din China în Moldova: cu avionul 120 ¥ pe kg (14–20 zile), pe mare 50 ¥ pe kg (45–60 zile), de la 1 kg. Calculator de cost.">
+  <meta property="og:url" content="https://longmacargo.web.app/ro/rates.html">
+  <meta property="og:image" content="https://longmacargo.web.app/assets/logo-wide.webp">
+  <meta property="og:image:type" content="image/webp">
+  <meta property="og:image:width" content="1774">
+  <meta property="og:image:height" content="887">
+  <meta property="og:image:alt" content="Longma Cargo">
+  <meta name="twitter:card" content="summary_large_image">
+  <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Service","name":"Livrare de produse din China în Moldova","serviceType":"Cargo din China","provider":{"@id":"https://longmacargo.web.app/#org"},"areaServed":{"@type":"Country","name":"Moldova"},"offers":[{"@type":"Offer","name":"Avion, 14–20 zile","priceSpecification":{"@type":"UnitPriceSpecification","price":120,"priceCurrency":"CNY","unitCode":"KGM","referenceQuantity":{"@type":"QuantitativeValue","value":1,"unitCode":"KGM"}}},{"@type":"Offer","name":"Maritim, 45–60 zile","priceSpecification":{"@type":"UnitPriceSpecification","price":50,"priceCurrency":"CNY","unitCode":"KGM","referenceQuantity":{"@type":"QuantitativeValue","value":1,"unitCode":"KGM"}}}]},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Acasă","item":"https://longmacargo.web.app/ro/"},{"@type":"ListItem","position":2,"name":"Tarife","item":"https://longmacargo.web.app/ro/rates.html"}]}]}</script>
+  <!-- /seo -->
+</head>
+<body data-page="rates" data-lang="ro" data-root="../">
+<main id="main">
+  <header class="page-head">
+    <h1 class="h1 h1-page" data-i="rates.h">Două moduri de livrare</h1>
+    <p class="lead" data-i="rates.lead">Prețul se calculează pe kilogram de colet, după ambalarea în depozitul din China. Se poate trimite de la 1 kg.</p>
+  </header>
+
+  <section class="sec sec-tight">
+    <div class="rates">
+      <article class="rate rate-air">
+        <svg class="rate-ic"><use href="#i-plane"/></svg>
+        <h2 class="rate-h" data-i="rates.air">Avion</h2>
+        <p class="price"><b>120</b><span>¥ / <span data-i="kg">kg</span></span></p>
+        <p class="price-lei" data-lei="120"></p>
+        <p class="rate-t"><b>14–20 <span data-i="days">zile</span></b><span data-i="rates.airfor">Haine, încălțăminte, accesorii — când e nevoie mai repede.</span></p>
+        <a class="btn btn-white" href="order.html"><span data-i="rates.pickAir">Comandă cu avionul</span></a>
+      </article>
+      <article class="rate rate-sea">
+        <svg class="rate-ic"><use href="#i-ship"/></svg>
+        <h2 class="rate-h" data-i="rates.sea">Maritim</h2>
+        <p class="price"><b>50</b><span>¥ / <span data-i="kg">kg</span></span></p>
+        <p class="price-lei" data-lei="50"></p>
+        <p class="rate-t"><b>45–60 <span data-i="days">zile</span></b><span data-i="rates.seafor">Lucruri grele și mari — când contează prețul.</span></p>
+        <a class="btn btn-ink" href="order.html?m=sea"><span data-i="rates.pickSea">Comandă pe mare</span></a>
+      </article>
+
+      <form class="calc" id="calc" aria-labelledby="calcH">
+        <h2 class="rate-h" id="calcH" data-i="calc.h">Calculează coletul tău</h2>
+        <div class="seg" role="radiogroup" aria-label="Способ доставки">
+          <label><input type="radio" name="m" value="air" checked><span><svg class="ic"><use href="#i-plane"/></svg><span data-i="rates.air">Avion</span></span></label>
+          <label><input type="radio" name="m" value="sea"><span><svg class="ic"><use href="#i-ship"/></svg><span data-i="rates.sea">Maritim</span></span></label>
+        </div>
+        <label class="field"><span data-i="calc.w">Greutate, kg</span>
+          <span class="kg"><button type="button" data-kg="-0.5" aria-label="Меньше">−</button><input id="kg" type="number" inputmode="decimal" min="1" step="0.1" value="1"><button type="button" data-kg="0.5" aria-label="Больше">+</button></span>
+        </label>
+        <div class="presets" aria-label="Примеры веса">
+          <button type="button" data-w="0.3" data-i="pre.tee">Tricou</button>
+          <button type="button" data-w="0.7" data-i="pre.hoodie">Hanorac</button>
+          <button type="button" data-w="1.8" data-i="pre.shoes">Adidași în cutie</button>
+          <button type="button" data-w="1.2" data-i="pre.jacket">Geacă</button>
+        </div>
+        <div class="calc-out" aria-live="polite">
+          <p class="big"><b id="outCny">120 ¥</b><span id="outLei"></span></p>
+          <p class="calc-meta"><span id="outDays"></span>, <span id="outW"></span></p>
+        </div>
+        <p class="hint" data-i="calc.note">Minim 1 kg. Suma exactă o spunem după cântărirea în depozit.</p>
+      </form>
+    </div>
+  </section>
+
+  <section class="sec">
+    <h2 class="h2" data-i="price.h">Ce include livrarea</h2>
+    <ul class="incl">
+      <li><svg class="ic"><use href="#i-bag"/></svg><b data-i="inc.1">Cumpărarea produsului</b><span data-i="inc.1t">Cumpărăm noi — nu ai nevoie de cont sau card chinezesc.</span></li>
+      <li><svg class="ic"><use href="#i-box"/></svg><b data-i="inc.2">Depozit în China</b><span data-i="inc.2t">Produsele se adună într-un singur colet înainte de expediere.</span></li>
+      <li><svg class="ic"><use href="#i-plane"/></svg><b data-i="inc.3">Drumul până în Moldova</b><span data-i="inc.3t">Cu avionul sau pe mare — după tariful ales.</span></li>
+      <li><svg class="ic"><use href="#i-hand"/></svg><b data-i="inc.4">Predare personală</b><span data-i="inc.4t">Ne întâlnim în Moldova și îți dăm coletul în mână.</span></li>
+    </ul>
+  </section>
+</main>
+<script src="../config.js?v=14"></script>
+<script src="../i18n.js?v=14"></script>
+<script src="../store.js?v=14"></script>
+<script src="../app.js?v=14"></script>
+</body>
+</html>

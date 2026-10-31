@@ -1,13 +1,163 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://longmacargo.web.app/</loc><lastmod>2026-10-31</lastmod><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://longmacargo.web.app/rates.html</loc><lastmod>2026-10-31</lastmod><changefreq>monthly</changefreq><priority>0.9</priority></url>
-  <url><loc>https://longmacargo.web.app/guide.html</loc><lastmod>2026-10-31</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://longmacargo.web.app/order.html</loc><lastmod>2026-10-31</lastmod><changefreq>monthly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://longmacargo.web.app/faq.html</loc><lastmod>2026-10-31</lastmod><changefreq>monthly</changefreq><priority>0.7</priority></url>
-  <url><loc>https://longmacargo.web.app/track.html</loc><lastmod>2026-10-31</lastmod><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://longmacargo.web.app/privacy.html</loc><lastmod>2026-10-31</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://longmacargo.web.app/terms.html</loc><lastmod>2026-10-31</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://longmacargo.web.app/returns.html</loc><lastmod>2026-10-31</lastmod><changefreq>yearly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://longmacargo.web.app/cookies.html</loc><lastmod>2026-10-31</lastmod><changefreq>yearly</changefreq><priority>0.2</priority></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://longmacargo.web.app/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/ro/</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/rates.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/rates.html"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/rates.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/rates.html"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/ro/rates.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/rates.html"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/rates.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/rates.html"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/guide.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/guide.html"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/guide.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/guide.html"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/ro/guide.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/guide.html"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/guide.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/guide.html"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/order.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/order.html"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/order.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/order.html"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/ro/order.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/order.html"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/order.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/order.html"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/faq.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/faq.html"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/ro/faq.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/faq.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/faq.html"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/track.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/track.html"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/track.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/track.html"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/ro/track.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.5</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/track.html"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/track.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/track.html"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/privacy.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/ro/privacy.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/privacy.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/privacy.html"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/terms.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/terms.html"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/ro/terms.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/terms.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/terms.html"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/returns.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/returns.html"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/returns.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/returns.html"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/ro/returns.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/returns.html"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/returns.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/returns.html"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/cookies.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/cookies.html"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/cookies.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/cookies.html"/>
+  </url>
+  <url>
+    <loc>https://longmacargo.web.app/ro/cookies.html</loc>
+    <lastmod>2026-10-31</lastmod>
+    <priority>0.3</priority>
+    <xhtml:link rel="alternate" hreflang="ru" href="https://longmacargo.web.app/cookies.html"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://longmacargo.web.app/ro/cookies.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://longmacargo.web.app/cookies.html"/>
+  </url>
 </urlset>

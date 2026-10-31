@@ -145,7 +145,7 @@
 
     $("#olist").innerHTML = orders.length
       ? orders.map((o) => card(o, fresh(o))).join("")
-      : `<div class="empty"><span class="crop crop-panda"><img src="assets/panda.webp" alt=""></span><div><b>${esc(U.t("acc.empty", "Заказов пока нет"))}</b><p>${esc(U.t("acc.emptyT", "Пришлите ссылку на вещь — мы выкупим её и привезём."))}</p><a class="btn btn-red btn-sm" href="order.html">${esc(U.t("acc.new", "Новый заказ"))}</a></div></div>`;
+      : `<div class="empty"><span class="crop crop-panda"><img src="${window.LM_ROOT || ""}assets/panda.webp" alt=""></span><div><b>${esc(U.t("acc.empty", "Заказов пока нет"))}</b><p>${esc(U.t("acc.emptyT", "Пришлите ссылку на вещь — мы выкупим её и привезём."))}</p><a class="btn btn-red btn-sm" href="order.html">${esc(U.t("acc.new", "Новый заказ"))}</a></div></div>`;
 
     // текущие статусы считаем просмотренными — в следующий раз подсветятся только новые изменения
     try {

@@ -7,7 +7,7 @@
 
   function show(r) {
     if (!r) {
-      out.innerHTML = `<div class="trk-empty"><span class="crop crop-panda"><img src="assets/panda.webp" alt=""></span>
+      out.innerHTML = `<div class="trk-empty"><span class="crop crop-panda"><img src="${window.LM_ROOT || ""}assets/panda.webp" alt=""></span>
         <div><b>${V.esc(U.t("trk.none", "Заказ не найден"))}</b><p>${V.esc(U.t("trk.noneT", "Проверьте номер. Если заказ только оформлен, номер есть в личном кабинете."))}</p></div></div>`;
       return;
     }
